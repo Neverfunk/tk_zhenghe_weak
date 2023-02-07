@@ -1,5 +1,5 @@
 ﻿;------------------------------
-;引き継ぎ用キャラセレクト部分
+;继承用角色选择部分
 ;------------------------------
 @PASS_CHARA_CHARASELECT()
 #DIM FIRST_LINE
@@ -202,7 +202,7 @@ PRINTL
 CALL PRINT_TOGGLE_BUTTON(@"%"[技能]", 16, LEFT%", 1034, スキル引き継ぎ_TMP)
 CALL PRINT_TOGGLE_BUTTON(@"%"[衣装]", 16, LEFT%", 1035, 衣装引き継ぎ_TMP)
 PRINTL
-CALL PRINT_TOGGLE_BUTTON(@"%"[スリーサイズ]", 16, LEFT%", 1040, スリーサイズ引き継ぎ_TMP)
+CALL PRINT_TOGGLE_BUTTON(@"%"[所有身體素質]", 16, LEFT%", 1040, スリーサイズ引き継ぎ_TMP)
 CALL PRINT_TOGGLE_BUTTON(@"%"[体型]", 16, LEFT%", 1041, 体型引き継ぎ_TMP)
 CALL PRINT_TOGGLE_BUTTON(@"%"[体格]", 16, LEFT%", 1042, 体格引き継ぎ_TMP)
 CALL PRINT_TOGGLE_BUTTON(@"%"[胸囲尺寸]", 16, LEFT%", 1043, バストサイズ引き継ぎ_TMP)
@@ -340,7 +340,7 @@ CLEARLINE LINECOUNT - FIRST_LINE
 GOTO SHOW_LOOP
 
 ;-------------------------------------------
-;キャラの引き継ぎ設定をTMPにコピーする
+;将角色的继承设定复制到TMP
 ;-------------------------------------------
 @PASS_CHARA_COPY_ORIGINAL_TO_TMP(対象)
 #DIM 対象
@@ -496,8 +496,8 @@ ELSE
 ENDIF
 
 ;-------------------------------------------
-;TMPをキャラの引き継ぎ設定に反映する
-;ついでに設定済みフラグをたてたり折ったり
+;将TMP反映到角色的继承设定中
+;顺便把设定好的标志竖起来折起来
 ;-------------------------------------------
 @PASS_CHARA_COPY_TMP_TO_ORIGINAL(対象)
 #DIM 対象
@@ -721,7 +721,7 @@ ELSE
 ENDIF
 
 ;-------------------------------------------
-;プリセットセーブ
+;存为预设
 ;-------------------------------------------
 @PASS_CHARA_SAVE_GLOBAL
 #DIM FIRST_LINE
@@ -738,7 +738,7 @@ PRINTFORML [9] 取消
 INPUT
 IF RESULT == 9
 	RETURN
-ELSEIF INRANGE(RESULT, 0, MAX_PASS_GLOBAL_SAvE)
+ELSEIF INRANGE(RESULT, 0, MAX_PASS_GLOBAL_SAVE)
 	LOCAL:1 = RESULT
 	FOR LOCAL, 0, VARSIZE("ABL引き継ぎ")
 		ABL引き継ぎ_G:(LOCAL:1):LOCAL = ABL引き継ぎ_TMP:LOCAL
@@ -809,7 +809,7 @@ PRINTFORML [9] 取消
 INPUT
 IF RESULT == 9
 	RETURN
-ELSEIF INRANGE(RESULT, 0, MAX_PASS_GLOBAL_SAvE)
+ELSEIF INRANGE(RESULT, 0, MAX_PASS_GLOBAL_SAVE)
 	LOCAL:1 = RESULT
 	FOR LOCAL, 0, VARSIZE("ABL引き継ぎ")
 		ABL引き継ぎ_TMP:LOCAL = ABL引き継ぎ_G:(LOCAL:1):LOCAL
