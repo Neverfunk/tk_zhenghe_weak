@@ -930,7 +930,7 @@ FOR LOCAL, 0, ARG:3 >= 0 ? 3 # 2
 NEXT
 UNIT_TIRED_COUNT:(ARG:0):(ARG:1) += 攻撃側疲労度
 IF ARG:3 >= 0
-	UNIT_TIRED_COUNT:(ARG:2):(ARG:3) += 防御側疲労度 
+	UNIT_TIRED_COUNT:(ARG:2):(ARG:3) += 防御側疲労度
 ELSE
 	CITY_TIRED_COUNT:(ARG:2) += 防御側疲労度
 ENDIF
@@ -970,7 +970,7 @@ ENDIF
 対象側 = !発動側
 
 SIF BATTLE_COMMANDER_NUM:発動側 == 0
-	RETURN 
+	RETURN
 
 CALL FISHER_YATES_SHAFFLE(BATTLE_COMMANDER_NUM:発動側)
 
@@ -1013,7 +1013,7 @@ VARSET 対象側キャラ, -1
 対象側 = !発動側
 
 SIF BATTLE_COMMANDER_NUM:発動側 == 0
-	RETURN 
+	RETURN
 
 CALL FISHER_YATES_SHAFFLE(BATTLE_COMMANDER_NUM:発動側)
 
@@ -1222,17 +1222,19 @@ ENDSELECT
 ホフゴブリン勝利 = 0
 ホフゴブリン敗北 = 0
 
-ホフゴブリン = GET_COUNTRY_FROM_ID(SP_COUNTRY_ID:特殊勢力_ホフゴブリン)
-CHANGE_Government_GOBLIN:0 = ホフゴブリン
-
-IF 勝利勢力 == ホフゴブリン
-	ホフゴブリン勝利 = 1
-	SIF 敗北部隊 == -1
-		CFLAG:(GET_COUNTRY_BOSS(ホフゴブリン)):1709 += 10
-ELSEIF 敗北勢力 == ホフゴブリン
-	ホフゴブリン敗北 = 1
-	SIF 敗北部隊 == -1
-		CFLAG:(GET_COUNTRY_BOSS(ホフゴブリン)):1709 = MAX(1, CFLAG:(GET_COUNTRY_BOSS(ホフゴブリン)):1709 - 10)
+ホフゴブリン = CHANGE_Government_GOBLIN:0
+SIF ホフゴブリン == 0
+        ホフゴブリン = GET_COUNTRY_FROM_ID(SP_COUNTRY_ID:特殊勢力_ホフゴブリン)
+IF IS_COUNTRY(ホフゴブリン)
+        IF (勝利部隊 >= 0 && 勝利勢力 == ホフゴブリン) || (勝利部隊 < 0 && CITY_OWNER:勝利勢力 == ホフゴブリン)
+                ホフゴブリン勝利 = 1
+                SIF 敗北部隊 == -1
+                        CFLAG:(GET_COUNTRY_BOSS(ホフゴブリン)):1709 += 10
+        ELSEIF (敗北部隊 >= 0 && 敗北勢力 == ホフゴブリン) || (敗北部隊 < 0 && CITY_OWNER:敗北勢力 == ホフゴブリン)
+                ホフゴブリン敗北 = 1
+                SIF 敗北部隊 == -1
+                        CFLAG:(GET_COUNTRY_BOSS(ホフゴブリン)):1709 = MAX(1, CFLAG:(GET_COUNTRY_BOSS(ホフゴブリン)):1709 - 10)
+        ENDIF
 ENDIF
 
 
@@ -1287,7 +1289,7 @@ CALL UNIT_BREAK_GROW(勝利側, 勝利勢力, 勝利部隊, 敗北勢力, 敗北
 
 ;戦死設定が無効なら戻す
 SIF CONFIG:305 <= 0
-	RETURN 
+	RETURN
 
 ;設定に応じた戦死率を設定(DEATH_RATE / 1000)
 IF CONFIG:305 == 3
@@ -1439,7 +1441,7 @@ FOR LOCAL, 0, BATTLE_COMMANDER_NUM:敗北側
 	LOCAL:4 = BATTLE_COMMANDER:敗北側:LOCAL
 	SIF LOCAL:4 < 0
 		CONTINUE
-	IF CAN_CAPTURE(LOCAL:4) && RAND:1000 < CAPTURE_RATE:LOCAL 
+	IF CAN_CAPTURE(LOCAL:4) && RAND:1000 < CAPTURE_RATE:LOCAL
 		IF IS_SP_COUNTRY(COUNTRY_W) && GETBIT(TALENT:(LOCAL:4):特殊勢力陥落系, SP_COUNTRY_TO_CONST(COUNTRY_W))
 			CALL COLOR_PRINTW(@"%ANAME(LOCAL:4)%自己把自己捆了起来", カラー_警告)
 		ELSEIF COUNTRY_L == CFLAG:MASTER:所属
