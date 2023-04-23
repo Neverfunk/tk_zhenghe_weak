@@ -1,4 +1,9 @@
-﻿;---------------------
+﻿@EVENT_DAILY_MILLIONAIRE_TAG()
+	LOCAL = 0
+	SETBIT LOCAL,EVENT_TAG_男性主角无关
+	SETBIT LOCAL,EVENT_TAG_NTR
+	RETURN LOCAL
+;---------------------
 ;発生確率(1000分率 100で10%)
 ;---------------------
 @EVENT_DAILY_MILLIONAIRE_RATE()
@@ -66,9 +71,9 @@ PRINTFORML 當%ANAME(MASTER)%處理政務時，部下報告有客人到訪
 	PRINTFORMW 那位客人是在幻想鄉裡面的一位名声远扬的富豪
 	PRINTFORML 此人以傲慢聞名，是一位实在不想和他見面的客人。但是，他遊玩一次使用的金額足以成立一個小型的勢力
 	PRINTFORMW %ANAME(MASTER)%認為這位客人並不能得罪，所以決定去和客人會面
-	PRINTFORML 
-	PRINTFORML 
-	PRINTFORML 
+	PRINTFORML
+	PRINTFORML
+	PRINTFORML
 	PRINTFORML 「咦，你就是%ANAME(MASTER)%吧？你比我想像中還要寒酸呀」
 	PRINTFORML 「嘛，我來到這裡只是為了打發時間。如果不是的話，誰又會特地到這種偏僻的郊外？」
 	PRINTFORMW 「那麼……，到底偏僻郊外的深山大將軍能給予什麼娛樂給我呢？真是期待」
@@ -197,7 +202,7 @@ SELECTCASE DVAR:富豪_お気に入り調教回数
 			PRINTFORML 那個男人細聲地說著，手已經很快地把自己的肉棒放了出來，然後把%ANAME(対象)%的內褲脫下，把自己的肉棒插進已經濕透的小穴中
 			PRINTFORMW 看來他已經沒有使用安全套了……
 			PRINTFORMW 「啊啊～就是这个，这种吸附感简直是！　这家伙的小穴可真厉害啊，诶？」
-			PRINTFORMW 被富豪の肉棒开发着敏感部位、%ANAME(対象)%的身体抵抗的意志减弱下来 
+			PRINTFORMW 被富豪の肉棒开发着敏感部位、%ANAME(対象)%的身体抵抗的意志减弱下来
 			PRINTFORML 明知道自己的痴態被を\@ IS_LOVER(対象) ? 思い慕的# \@%ANAME(MASTER)%全都看在眼里、%ANAME(対象)%的嘴里还是忍不住漏出了甜蜜的呻吟
 			PRINTFORMW 那個男人在膣内射出種子，%ANAME(対象)%發出最甜美的叫聲並弓起背地高潮了……
 			PRINTFORML （身体已经调教的差不多了嘛…要是能再坚持一下下就更好玩了。呀嘞呀嘞…）
@@ -269,7 +274,7 @@ PRINTFORML
 IF DVAR:富豪_お気に入り調教回数 >= 3 && IS_LOVER(対象) && あなたへの想い > 10000
 	PRINTFORML 在这样的情况下，「我们也好好享受吧」富豪的侍女却一边这么说着，一边缠了上来
 	PRINTFORML %ANAME(MASTER)%要……
-	PRINTFORMW 
+	PRINTFORMW
 	CALL ASK_YN("自重", "自己也享受")
 	IF RESULT == 1
 		IF DVAR:富豪_寝取られフラグ >= 2
@@ -308,7 +313,7 @@ IF DVAR:富豪_お気に入り調教回数 >= 3 && IS_LOVER(対象) && あなた
 	ENDIF
 ENDIF
 PRINTFORML
-PRINTFORMW 
+PRINTFORMW
 ;追加分
 IF DVAR:富豪_お気に入り調教回数 >= 3 && IS_LOVER(対象)
 	IF あなたへの想い > 10000 && DVAR:富豪_寝取られフラグ == 0
@@ -417,7 +422,7 @@ CALL COLOR_PRINT(@"{報酬}", カラー_注意)
 PRINTFORML ……
 MONEY += 報酬
 IF IS_LOVER(対象) && DVAR:富豪_お気に入り調教回数 > 2
-	IF あなたへの想い > 10000 && DVAR:富豪_お気に入り調教回数 >= 4 
+	IF あなたへの想い > 10000 && DVAR:富豪_お気に入り調教回数 >= 4
 		PRINTFORMW 「……不枉我这用心的调教她，最终还是臣服在我得技巧之下了。库库……」
 		PRINTFORMW 「嗯？不，没什么，你不必介意」
 		PRINTFORML 「……等她选择了我之后，即使不愿意你也会明白的」
@@ -465,7 +470,7 @@ IF DVAR:富豪_お気に入り調教回数 >= 3
 				PRINTFORMW 在绝顶的瞬间，她像是更加渴求%ANAME(MASTER)%般扭动腰部
 				PRINTFORMW 希望用%ANAME(MASTER)%的身体完全冲掉那个不好的回忆
 				PRINTFORMW 听到这样的愿望，%ANAME(MASTER)%的动作更加激烈，身体与%ANAME(対象)%再一次交合起来……
-			ELSEIF DVAR:富豪_パトロンフラグ >= 2 
+			ELSEIF DVAR:富豪_パトロンフラグ >= 2
 				PRINTFORML %ANAME(MASTER)%虽然对再次违约的男人感到愤怒
 				PRINTFORMW 但是因为不能白白浪费%ANAME(対象)%的献身，只得悄悄地咽下愤怒
 				PRINTFORMW 作为交换，她请求的是%ANAME(MASTER)%帮忙清洁身体
@@ -478,7 +483,7 @@ IF DVAR:富豪_お気に入り調教回数 >= 3
 				PRINTFORMW 希望%ANAME(MASTER)%能够将我的身心填满
 				PRINTFORMW 听到这样的愿望，%ANAME(MASTER)%的动作更加激烈，身体与%ANAME(対象)%再一次交合起来……
 			ENDIF
-			PRINTFORML 
+			PRINTFORML
 			DVAR:富豪_パトロンフラグ ++
 			CALL FUCK_MAKELOVE(対象, GET_ID(MASTER), @"%ANAME(MASTER)%的嘴唇", ANAME(MASTER))
 			CALL FUCK(MASTER, "Ｃ, 射精, Ｖ挿入", "童貞喪失", 0, "", "", @"%ANAME(対象)%的膣穴")
@@ -517,13 +522,13 @@ ELSE
 	DVAR:富豪_パトロンフラグ = 0
 ENDIF
 ;追加分
-IF DVAR:富豪_お気に入り調教回数 == 5 
+IF DVAR:富豪_お気に入り調教回数 == 5
 	;今まで不義理を働いていない
 	IF あなたへの想い >= 10000 && IS_LOVER(対象) && DVAR:富豪_寝取られフラグ == 0
 		CALL SINGLE_DRAWLINE
-		PRINTFORML 
-		PRINTFORML 
-		PRINTFORML 
+		PRINTFORML
+		PRINTFORML
+		PRINTFORML
 		PRINTFORMW 数日后，富豪再次来访
 		PRINTFORMW 并且，在%ANAME(MASTER)%的面前毫不掩饰地宣言了打算迎接%ANAME(対象)%作妾
 		PRINTFORMW 告诉她，比起在这里的生活，自己的宫殿要更加豪华，，要给予%ANAME(対象)%作为女人最极上的幸福……
@@ -556,7 +561,7 @@ IF DVAR:富豪_お気に入り調教回数 == 5
 		PRINTFORMW 不得不承认。输给了曾经认为在自己人生中没有必要的、不存在的东西……
 		PRINTFORMW 「你们之间，有那个吗…。我没有得到的东西……」
 		PRINTFORML 他至今坚信的绝对信条，被两人的爱打碎了。
-		PRINTFORMW 就连自己绝对自信的性器，也让自己感到非常空虚…… 
+		PRINTFORMW 就连自己绝对自信的性器，也让自己感到非常空虚……
 		PRINTFORML 在他的心中，已经没有能够相信的东西了
 		PRINTFORMW 富豪颓丧地坐在椅子上
 		PRINTFORML 从那个身姿中能够感觉到，到刚才为止那样的傲慢愚蠢的气氛消失了
@@ -579,24 +584,28 @@ IF DVAR:富豪_お気に入り調教回数 == 5
 		PRINTFORML 下次再来就好了
 		PRINTFORMW 「……你说什么？」
 		PRINTFORMW 希望你什么时候能够再来拜访。如果说到现在为止爱和朋友都不知道的话，从现在开始知道就行了。由自己来证明给自己看
-		PRINTFORMW 所以如果觉得寂寞的话，什么时候来都可以。%ANAME(MASTER)%告诉他，这是两人共同的期望。 
+		PRINTFORMW 所以如果觉得寂寞的话，什么时候来都可以。%ANAME(MASTER)%告诉他，这是两人共同的期望。
 		PRINTFORML 「……哈哈、哈哈哈！你果然有这作为君主的气量」
 		PRINTFORMW 富豪爽快地笑了。那笑容不像以前那样阴暗，而是明快又灿烂。
 		PRINTFORMW 「那么今后也请让我做你的好朋友。……谢谢你，我的第一个朋友」
 		PRINTFORMW 富豪留下这句话回去了。承诺今后将会作为后援支援我们。
-		PRINTFORML 
-		CALL COLOR_PRINTW(@"富豪がパトロンになりました", カラー_注意)
-		PRINTFORML 
+		PRINTFORML
+		CALL COLOR_PRINTW(@"富豪成为了赞助者", カラー_注意)
+		;TranslatedMark @"富豪がパトロンになりました", カラー_注意
+		PRINTFORML
 		DVAR:富豪_お気に入りID = GET_ID(対象)
 		DVAR:富豪_発生フラグ = -1
 		DVAR:富豪_パトロンフラグ = 5
-			
+		PRINTFORML 那么，%ANAME(MASTER)%希望富豪是个怎样的人呢？
+		CALL ASK_MULTI("满足自己绿帽癖的人","和好兄弟分享女人的人","随便啦")
+		富豪的类型 = RESULT
+		PRINTFORML %ANAME(MASTER)%作出了自己的选择
 	;1回不義理を働いた
-	ELSEIF あなたへの想い >= 10000 && IS_LOVER(対象) && DVAR:富豪_寝取られフラグ == 1 
+	ELSEIF あなたへの想い >= 10000 && IS_LOVER(対象) && DVAR:富豪_寝取られフラグ == 1
 		CALL SINGLE_DRAWLINE
-		PRINTFORML 
-		PRINTFORML 
-		PRINTFORML 
+		PRINTFORML
+		PRINTFORML
+		PRINTFORML
 		PRINTFORMW 数日后，富豪再次来访
 		PRINTFORMW 并且，在%ANAME(MASTER)%的面前毫不掩饰地宣言了打算迎接%ANAME(対象)%作妾
 		PRINTFORMW 告诉她，比起在这里的生活，自己的宫殿要更加豪华，，要给予%ANAME(対象)%作为女人最极上的幸福……
@@ -626,7 +635,7 @@ IF DVAR:富豪_お気に入り調教回数 == 5
 		PRINTFORMW 那种呻吟，是%ANAME(MASTER)%从未听过的妖艳…
 		PRINTFORMW 男人的肉棒仿佛要刺破子宫般，在蜜径的深处释放出自己的欲望，受到冲击的肉壁不断地紧缩、颤动
 		PRINTFORMW 肉体的快乐像潮水般一波波涌来，吹飞了理智、思绪，其他的一切都不重要了
-		PRINTFORMW 抛弃了最后一丝矜持的%ANAME(対象)%，背部像弓一样紧紧地绷了起来了，不停地发出淫荡的叫声，攀上了极乐的巅峰，彻底陶醉在高潮之中…… 
+		PRINTFORMW 抛弃了最后一丝矜持的%ANAME(対象)%，背部像弓一样紧紧地绷了起来了，不停地发出淫荡的叫声，攀上了极乐的巅峰，彻底陶醉在高潮之中……
 		PRINTFORMW 「我非常感谢你？你教会了我这么好的东西，为了我」
 		PRINTFORML 「くくくく…放心吧。她的事由我来照料」
 		PRINTFORMW 「来，回去吧。继续在我的家里体会真正的快乐吧」
@@ -662,7 +671,7 @@ IF DVAR:富豪_お気に入り調教回数 == 5
 		DVAR:富豪_お気に入り調教回数 = 0
 		DVAR:富豪_寝取られフラグ = 0
 		DVAR:富豪_パトロンフラグ = 0
-		
+
 	;それ以外で5回連続してあれするとあれ
 	ELSE
 		CALL SINGLE_DRAWLINE
