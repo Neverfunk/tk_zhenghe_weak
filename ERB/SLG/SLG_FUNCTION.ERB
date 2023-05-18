@@ -186,7 +186,7 @@ IF ARG:1 < 0
 	LOCAL:2 = MAX(CITY_SOLDIER:(ARG:0) + ARG:2, 0)
 	SIF ARG:3
 		PRINTFORML %@"\@ GET_COUNTRY_BOSS(LOCAL:1) >= 0 ? %SNAME(GET_COUNTRY_BOSS(LOCAL:1))% # 無所属 \@", MAX_CHARANAME_LENGTH / 2, LEFT%軍:{CITY_SOLDIER:(ARG:0), 6, RIGHT} → {LOCAL:2}
-	CITY_SOLDIER:(ARG:0) = LOCAL:2	
+	CITY_SOLDIER:(ARG:0) = LOCAL:2
 ELSE
 	LOCAL:1 = ARG:0
 	LOCAL:2 = MAX(UNIT_SOLDIER:(ARG:0):(ARG:1) + ARG:2, 0)
@@ -432,7 +432,7 @@ RETURN -1
 ;-------------------------------------------------
 @GET_UNIT_COMMANDER_NAME(ARG:0, ARG:1, ARGS:2 = "・")
 #FUNCTIONS
-LOCALS:0 = 
+LOCALS:0 =
 FOR LOCAL:0, 0, MAX_UNIT_COMMANDER
 	LOCAL:1 = GET_UNIT_COMMANDER(ARG:0, ARG:1, LOCAL:0)
 	IF LOCAL:1 >= 0
@@ -455,7 +455,7 @@ RETURNF LOCALS:0
 ;-------------------------------------------------
 @GET_UNIT_COMMANDER_CALLNAME(ARG:0, ARG:1, ARGS:2 = "・")
 #FUNCTIONS
-LOCALS:0 = 
+LOCALS:0 =
 FOR LOCAL:0, 0, MAX_UNIT_COMMANDER
 	LOCAL:1 = GET_UNIT_COMMANDER(ARG:0, ARG:1, LOCAL:0)
 	IF LOCAL:1 >= 0
@@ -507,7 +507,7 @@ IF ARG:3
 				SETCOLOR カラー_警告
 				PRINT 敵
 			ELSE
-				PRINT   
+				PRINT
 			ENDIF
 		CASE 1
 			SETCOLOR カラー_停戦
@@ -538,7 +538,7 @@ IF ARG:3
 			PRINT 傀
 	ENDSELECT
 	SETCOLOR COUNTRY_COLOR:(ARG:0)
-	PRINT  
+	PRINT
 ENDIF
 PRINTFORM  %LOCALS:2, 25, LEFT%
 PRINTFORM ★:{SUM_UNIT_STARS(ARG:0, ARG:1), 4, LEFT}
@@ -583,7 +583,7 @@ IF ARG:1
 				SETCOLOR カラー_警告
 				PRINT 敵
 			ELSE
-				PRINT   
+				PRINT
 			ENDIF
 		CASE 1
 			SETCOLOR カラー_停戦
@@ -602,7 +602,7 @@ IF ARG:1
 			PRINT 自
 	ENDSELECT
 	SETCOLOR COUNTRY_COLOR:(LOCAL:1)
-	PRINT  
+	PRINT
 ENDIF
 PRINTFORM  %LOCALS:2, 25, LEFT%
 PRINTFORM ★:{SUM_CITY_STARS(ARG:0), 4, LEFT}
@@ -651,7 +651,7 @@ RETURNF LOCAL:2
 ;-------------------------------------------------
 @GET_CITY_COMMANDER_NAME(ARG:0, ARGS:1 = "・")
 #FUNCTIONS
-LOCALS:0 = 
+LOCALS:0 =
 FOR LOCAL:0, 0, MAX_CITY_COMMANDER
 	LOCAL:1 = GET_CITY_COMMANDER(ARG:0, LOCAL:0)
 	IF LOCAL:1 >= 0
@@ -674,7 +674,7 @@ RETURNF LOCALS:0
 ;-------------------------------------------------
 @GET_CITY_COMMANDER_CALLNAME(ARG:0, ARGS:1 = "・")
 #FUNCTIONS
-LOCALS:0 = 
+LOCALS:0 =
 FOR LOCAL:0, 0, MAX_CITY_COMMANDER
 	LOCAL:1 = GET_CITY_COMMANDER(ARG:0, LOCAL:0)
 	IF LOCAL:1 >= 0
@@ -802,7 +802,7 @@ ELSEIF ソート:0 == ABL:君主:知略
 	COUNTRY_AI_TYPE:勢力 = AI_外交
 ELSEIF ソート:0 == ABL:君主:政治
 	COUNTRY_AI_TYPE:勢力 = AI_内政
-ELSE 
+ELSE
 	COUNTRY_AI_TYPE:勢力 = AI_通常
 ENDIF
 
@@ -978,7 +978,7 @@ RETURNF -1
 ; 2 隣国は停戦ないし同盟中だが、隣国と同盟している国が殴ってくる可能性がある
 ; 1 隣国は停戦ないし同盟中だが、隣国と同盟している国が殴ってくる可能性がない
 ; 0 安全
-; 
+;
 ; TODO:隣国が停戦以上の関係であるが、その同盟国が攻め込んでくる関係
 ;--------------------------------------------------------
 @GET_CITY_RISK(ARG:0)
@@ -1270,7 +1270,7 @@ RETURNF -1
 
 ;-------------------------------------------------
 ;ARG:0番の勢力とARG:1番の勢力の関係を返す関数（式中タイプ）
-;RESULT:0 …… 敵対=0 停戦=1 連合=2 期限付き同盟=3 永久同盟=4 自国=5 
+;RESULT:0 …… 敵対=0 停戦=1 連合=2 期限付き同盟=3 永久同盟=4 自国=5
 	;従属国パッチ (ARG:0がARG:1に対して)宗主国=6 辺境伯=7 植民地=8 傀儡国=9
 ;RESULT:1 …… 最も優先度の高い関係の残り期間
 ;-------------------------------------------------
@@ -1291,7 +1291,7 @@ FOR LOCAL:0, 0, MAX_TREATY_M
 
 	LOCAL:2 = 0
 	LOCAL:3 = 0
-	
+
 	SIF TREATY_M_COUNTRY:(LOCAL:0):1:1 == ARG:0
 		LOCAL:2 = 1
 	SIF TREATY_M_COUNTRY:(LOCAL:0):0:0 == ARG:1
@@ -1309,7 +1309,7 @@ FOR LOCAL:0, 0, MAX_TREATY_CO
 
 	LOCAL:2 = 0
 	LOCAL:3 = 0
-	
+
 	SIF TREATY_CO_COUNTRY:(LOCAL:0):1:1 == ARG:0
 		LOCAL:2 = 1
 	SIF TREATY_CO_COUNTRY:(LOCAL:0):0:0 == ARG:1
@@ -1327,7 +1327,7 @@ FOR LOCAL:0, 0, MAX_TREATY_P
 
 	LOCAL:2 = 0
 	LOCAL:3 = 0
-	
+
 	SIF TREATY_P_COUNTRY:(LOCAL:0):1:1 == ARG:0
 		LOCAL:2 = 1
 	SIF TREATY_P_COUNTRY:(LOCAL:0):0:0 == ARG:1
@@ -1345,7 +1345,7 @@ FOR LOCAL:0, 0, MAX_TREATY_M
 
 	LOCAL:2 = 0
 	LOCAL:3 = 0
-	
+
 	SIF TREATY_M_COUNTRY:(LOCAL:0):0:0 == ARG:0
 		LOCAL:2 = 1
 	SIF TREATY_M_COUNTRY:(LOCAL:0):1:1 == ARG:1
@@ -1363,7 +1363,7 @@ FOR LOCAL:0, 0, MAX_TREATY_CO
 
 	LOCAL:2 = 0
 	LOCAL:3 = 0
-	
+
 	SIF TREATY_CO_COUNTRY:(LOCAL:0):0:0 == ARG:0
 		LOCAL:2 = 1
 	SIF TREATY_CO_COUNTRY:(LOCAL:0):1:1 == ARG:1
@@ -1381,7 +1381,7 @@ FOR LOCAL:0, 0, MAX_TREATY_P
 
 	LOCAL:2 = 0
 	LOCAL:3 = 0
-	
+
 	SIF TREATY_P_COUNTRY:(LOCAL:0):0:0 == ARG:0
 		LOCAL:2 = 1
 	SIF TREATY_P_COUNTRY:(LOCAL:0):1:1 == ARG:1
@@ -1471,7 +1471,7 @@ FOR LOCAL:0, 0, MAX_TREATY_M
 
 	LOCAL:2 = 0
 	LOCAL:3 = 0
-	
+
 	SIF TREATY_M_COUNTRY:(LOCAL:0):1:1 == ARG:0
 		LOCAL:2 = 1
 	SIF TREATY_M_COUNTRY:(LOCAL:0):0:0 == ARG:1
@@ -1489,7 +1489,7 @@ FOR LOCAL:0, 0, MAX_TREATY_CO
 
 	LOCAL:2 = 0
 	LOCAL:3 = 0
-	
+
 	SIF TREATY_CO_COUNTRY:(LOCAL:0):1:1 == ARG:0
 		LOCAL:2 = 1
 	SIF TREATY_CO_COUNTRY:(LOCAL:0):0:0 == ARG:1
@@ -1507,7 +1507,7 @@ FOR LOCAL:0, 0, MAX_TREATY_P
 
 	LOCAL:2 = 0
 	LOCAL:3 = 0
-	
+
 	SIF TREATY_P_COUNTRY:(LOCAL:0):1:1 == ARG:0
 		LOCAL:2 = 1
 	SIF TREATY_P_COUNTRY:(LOCAL:0):0:0 == ARG:1
@@ -1525,7 +1525,7 @@ FOR LOCAL:0, 0, MAX_TREATY_M
 
 	LOCAL:2 = 0
 	LOCAL:3 = 0
-	
+
 	SIF TREATY_M_COUNTRY:(LOCAL:0):0:0 == ARG:0
 		LOCAL:2 = 1
 	SIF TREATY_M_COUNTRY:(LOCAL:0):1:1 == ARG:1
@@ -1543,7 +1543,7 @@ FOR LOCAL:0, 0, MAX_TREATY_CO
 
 	LOCAL:2 = 0
 	LOCAL:3 = 0
-	
+
 	SIF TREATY_CO_COUNTRY:(LOCAL:0):0:0 == ARG:0
 		LOCAL:2 = 1
 	SIF TREATY_CO_COUNTRY:(LOCAL:0):1:1 == ARG:1
@@ -1561,7 +1561,7 @@ FOR LOCAL:0, 0, MAX_TREATY_P
 
 	LOCAL:2 = 0
 	LOCAL:3 = 0
-	
+
 	SIF TREATY_P_COUNTRY:(LOCAL:0):0:0 == ARG:0
 		LOCAL:2 = 1
 	SIF TREATY_P_COUNTRY:(LOCAL:0):1:1 == ARG:1
@@ -1822,7 +1822,7 @@ FOR LOCAL:0, 0, MAX_TREATY_A
 								;		COUNTRY_TREATY_NO:(LOCAL:4):0 --
 								;		COUNTRY_TREATY_NO:(ARG:1):0 --
 								;ENDSELECT
-								
+
 								; 締結
 								TREATY_A_TERM:(LOCAL:5) = ARG:2
 								TREATY_A_COUNTRY:(LOCAL:5):0 = LOCAL:4
@@ -1877,7 +1877,7 @@ FOR LOCAL:0, 0, MAX_TREATY_A
 								;		COUNTRY_TREATY_NO:(LOCAL:4):0 --
 								;		COUNTRY_TREATY_NO:(ARG:1):0 --
 								;ENDSELECT
-								
+
 								; 締結
 								TREATY_A_TERM:(LOCAL:5) = ARG:2
 								TREATY_A_COUNTRY:(LOCAL:5):0 = LOCAL:4
@@ -1932,7 +1932,7 @@ FOR LOCAL:0, 0, MAX_TREATY_A
 								;		COUNTRY_TREATY_NO:(LOCAL:4):0 --
 								;		COUNTRY_TREATY_NO:(ARG:1):0 --
 								;ENDSELECT
-								
+
 								; 締結
 								TREATY_A_TERM:(LOCAL:5) = ARG:2
 								TREATY_A_COUNTRY:(LOCAL:5):0 = LOCAL:4
@@ -1962,7 +1962,7 @@ FOR LOCAL:0, 0, MAX_TREATY_A
 				ENDIF
 			NEXT
 		ENDIF
-		
+
 		;(従属国パッチ)ARG:1が宗主国であるとき,全てのARG:1の従属国はARG:0との間で同盟を締結する
 		IF COUNTRY_Protectorate:(ARG:1) == 1
 			FOR LOCAL:1, 0, MAX_TREATY_M
@@ -1991,7 +1991,7 @@ FOR LOCAL:0, 0, MAX_TREATY_A
 								;		COUNTRY_TREATY_NO:(LOCAL:4):0 --
 								;		COUNTRY_TREATY_NO:(ARG:0):0 --
 								;ENDSELECT
-								
+
 								; 締結
 								TREATY_A_TERM:(LOCAL:5) = ARG:2
 								TREATY_A_COUNTRY:(LOCAL:5):0 = LOCAL:4
@@ -2046,7 +2046,7 @@ FOR LOCAL:0, 0, MAX_TREATY_A
 								;		COUNTRY_TREATY_NO:(LOCAL:4):0 --
 								;		COUNTRY_TREATY_NO:(ARG:0):0 --
 								;ENDSELECT
-								
+
 								; 締結
 								TREATY_A_TERM:(LOCAL:5) = ARG:2
 								TREATY_A_COUNTRY:(LOCAL:5):0 = LOCAL:4
@@ -2101,7 +2101,7 @@ FOR LOCAL:0, 0, MAX_TREATY_A
 								;		COUNTRY_TREATY_NO:(LOCAL:4):0 --
 								;		COUNTRY_TREATY_NO:(ARG:0):0 --
 								;ENDSELECT
-								
+
 								; 締結
 								TREATY_A_TERM:(LOCAL:5) = ARG:2
 								TREATY_A_COUNTRY:(LOCAL:5):0 = LOCAL:4
@@ -2131,7 +2131,7 @@ FOR LOCAL:0, 0, MAX_TREATY_A
 				ENDIF
 			NEXT
 		ENDIF
-		
+
 		RETURN 1
 	ENDIF
 NEXT
@@ -2202,7 +2202,7 @@ FOR LOCAL:0, 0, MAX_TREATY_C
 				COUNTRY_TREATY_NO:(ARG:0):0 ++
 				COUNTRY_TREATY_NO:(ARG:1):0 ++
 		ENDSELECT
-		
+
 		;(従属国パッチ)ARG:0が宗主国であるとき,全てのARG:0の従属国はARG:1との間で停戦条約を締結する
 		IF COUNTRY_Protectorate:(ARG:0) == 1
 			FOR LOCAL:1, 0, MAX_TREATY_M
@@ -2214,7 +2214,7 @@ FOR LOCAL:0, 0, MAX_TREATY_C
 						;停戦関係の空きを探す
 							IF TREATY_C_TERM:(LOCAL:5) <= 0
 								; 空きがあれば成立
-								
+
 								; 関係マップのカウンタを戻す
 								CUR_RELATION = TMP_COUNTRY_RELATION:(LOCAL:4):(ARG:1)
 								;SELECTCASE CUR_RELATION
@@ -2225,7 +2225,7 @@ FOR LOCAL:0, 0, MAX_TREATY_C
 								;		COUNTRY_TREATY_NO:(LOCAL:4):0 --
 								;		COUNTRY_TREATY_NO:(ARG:1):0 --
 								;ENDSELECT
-								
+
 								; 締結
 								TREATY_C_TERM:(LOCAL:5) = ARG:2
 								TREATY_C_COUNTRY:(LOCAL:5):0 = LOCAL:4
@@ -2263,7 +2263,7 @@ FOR LOCAL:0, 0, MAX_TREATY_C
 						;停戦関係の空きを探す
 							IF TREATY_C_TERM:(LOCAL:5) <= 0
 								; 空きがあれば成立
-								
+
 								; 関係マップのカウンタを戻す
 								CUR_RELATION = TMP_COUNTRY_RELATION:(LOCAL:4):(ARG:1)
 								;SELECTCASE CUR_RELATION
@@ -2274,7 +2274,7 @@ FOR LOCAL:0, 0, MAX_TREATY_C
 								;		COUNTRY_TREATY_NO:(LOCAL:4):0 --
 								;		COUNTRY_TREATY_NO:(ARG:1):0 --
 								;ENDSELECT
-								
+
 								; 締結
 								TREATY_C_TERM:(LOCAL:5) = ARG:2
 								TREATY_C_COUNTRY:(LOCAL:5):0 = LOCAL:4
@@ -2312,7 +2312,7 @@ FOR LOCAL:0, 0, MAX_TREATY_C
 						;停戦関係の空きを探す
 							IF TREATY_C_TERM:(LOCAL:5) <= 0
 								; 空きがあれば成立
-								
+
 								; 関係マップのカウンタを戻す
 								CUR_RELATION = TMP_COUNTRY_RELATION:(LOCAL:4):(ARG:1)
 								;SELECTCASE CUR_RELATION
@@ -2323,7 +2323,7 @@ FOR LOCAL:0, 0, MAX_TREATY_C
 								;		COUNTRY_TREATY_NO:(LOCAL:4):0 --
 								;		COUNTRY_TREATY_NO:(ARG:1):0 --
 								;ENDSELECT
-								
+
 								; 締結
 								TREATY_C_TERM:(LOCAL:5) = ARG:2
 								TREATY_C_COUNTRY:(LOCAL:5):0 = LOCAL:4
@@ -2364,7 +2364,7 @@ FOR LOCAL:0, 0, MAX_TREATY_C
 						;停戦関係の空きを探す
 							IF TREATY_C_TERM:(LOCAL:5) <= 0
 								; 空きがあれば成立
-								
+
 								; 関係マップのカウンタを戻す
 								CUR_RELATION = TMP_COUNTRY_RELATION:(LOCAL:4):(ARG:0)
 								;SELECTCASE CUR_RELATION
@@ -2375,7 +2375,7 @@ FOR LOCAL:0, 0, MAX_TREATY_C
 								;		COUNTRY_TREATY_NO:(LOCAL:4):0 --
 								;		COUNTRY_TREATY_NO:(ARG:0):0 --
 								;ENDSELECT
-								
+
 								; 締結
 								TREATY_C_TERM:(LOCAL:5) = ARG:2
 								TREATY_C_COUNTRY:(LOCAL:5):0 = LOCAL:4
@@ -2413,7 +2413,7 @@ FOR LOCAL:0, 0, MAX_TREATY_C
 						;停戦関係の空きを探す
 							IF TREATY_C_TERM:(LOCAL:5) <= 0
 								; 空きがあれば成立
-								
+
 								; 関係マップのカウンタを戻す
 								CUR_RELATION = TMP_COUNTRY_RELATION:(LOCAL:4):(ARG:0)
 								;SELECTCASE CUR_RELATION
@@ -2424,7 +2424,7 @@ FOR LOCAL:0, 0, MAX_TREATY_C
 								;		COUNTRY_TREATY_NO:(LOCAL:4):0 --
 								;		COUNTRY_TREATY_NO:(ARG:0):0 --
 								;ENDSELECT
-								
+
 								; 締結
 								TREATY_C_TERM:(LOCAL:5) = ARG:2
 								TREATY_C_COUNTRY:(LOCAL:5):0 = LOCAL:4
@@ -2462,7 +2462,7 @@ FOR LOCAL:0, 0, MAX_TREATY_C
 						;停戦関係の空きを探す
 							IF TREATY_C_TERM:(LOCAL:5) <= 0
 								; 空きがあれば成立
-								
+
 								; 関係マップのカウンタを戻す
 								CUR_RELATION = TMP_COUNTRY_RELATION:(LOCAL:4):(ARG:0)
 								;SELECTCASE CUR_RELATION
@@ -2473,7 +2473,7 @@ FOR LOCAL:0, 0, MAX_TREATY_C
 								;		COUNTRY_TREATY_NO:(LOCAL:4):0 --
 								;		COUNTRY_TREATY_NO:(ARG:0):0 --
 								;ENDSELECT
-								
+
 								; 締結
 								TREATY_C_TERM:(LOCAL:5) = ARG:2
 								TREATY_C_COUNTRY:(LOCAL:5):0 = LOCAL:4
@@ -2661,18 +2661,18 @@ FOR LOCAL:0, 0, 4
 				SETCOLOR HSV_TO_RGB(LOCAL:5, LOCAL:6, LOCAL:7)
 				PRINTBUTTON "■", 0x1000000 + (LOCAL:5 << 14) + (LOCAL:6 << 7) + LOCAL:7
 			ENDIF
-			PRINTPLAIN  
+			PRINTPLAIN
 		NEXT
-		PRINTL 
+		PRINTL
 	NEXT
 NEXT
 RESETCOLOR
 CALL SINGLE_DRAWLINE
-PRINTPLAIN 接近既存勢力顔色的顔色除外 
+PRINTPLAIN 接近既存勢力顔色的顔色除外
 PRINTBUTTON "[無]", 100
 PRINTBUTTON "[弱]", 101
 PRINTBUTTON "[強]", 102
-PRINTL 
+PRINTL
 
 PRINTBUTTON "[采色器]", 201
 PRINTL
@@ -2761,7 +2761,7 @@ GOTO INPUT_LOOP
 {
 	基礎値 = (ランク補正外値 + ランクS補正対象値) * 250 +
 		ランクC補正対象値 * 450 +
-		ランクB補正対象値 * 750 + 
+		ランクB補正対象値 * 750 +
 		ランクA補正対象値 * 1250 +
 		500
 }
@@ -3028,22 +3028,22 @@ FOR LOCAL:0, 0, MAX_TREATY_M
 			TREATY_M_COUNTRY:(LOCAL:0):(LOCAL:1):0 = 0
 			COUNTRY_Protectorate:(ARG:0) = 0
 			IS_TREATY_M:(LOCAL:0) = 0
-			
+
 			;従属国簡易変数参考リセット
 			COUNTRY_Protectorate_REFERENCE:(ARG:0):0 = 0
 			COUNTRY_Protectorate_REFERENCE:(ARG:0):1 = 0
 			COUNTRY_Protectorate_REFERENCE:(ARG:0):2 = 0
-			
+
 			FOR LOCAL:2, 0, MAX_TREATY_COUNTRY
 				宗主国 = TREATY_M_COUNTRY:(LOCAL:0):(LOCAL:2):1
 				CALL CHECK_NON_Protectorate(宗主国)
-				
+
 				; 関係マップの更新
 				TMP_COUNTRY_RELATION:(ARG:0):(宗主国) = 0
 				TMP_COUNTRY_RELATION:(宗主国):(ARG:0) = 0
 				TMP_COUNTRY_RELATION_TERM:(ARG:0):(宗主国) = 0
 				TMP_COUNTRY_RELATION_TERM:(宗主国):(ARG:0) = 0
-				
+
 				TREATY_M_COUNTRY:(LOCAL:0):(LOCAL:2):1 = 0
 			NEXT
 		ENDIF
@@ -3056,22 +3056,22 @@ FOR LOCAL:0, 0, MAX_TREATY_CO
 		IF TREATY_CO_COUNTRY:(LOCAL:0):(LOCAL:1):0 == ARG:0
 			TREATY_CO_COUNTRY:(LOCAL:0):(LOCAL:1):0 = 0
 			COUNTRY_Protectorate:(ARG:0) = 0
-			
+
 			;従属国簡易変数参考リセット
 			COUNTRY_Protectorate_REFERENCE:(ARG:0):0 = 0
 			COUNTRY_Protectorate_REFERENCE:(ARG:0):1 = 0
 			COUNTRY_Protectorate_REFERENCE:(ARG:0):2 = 0
-			
+
 			FOR LOCAL:2, 0, MAX_TREATY_COUNTRY
 				宗主国 = TREATY_CO_COUNTRY:(LOCAL:0):(LOCAL:2):1
 				CALL CHECK_NON_Protectorate(宗主国)
-				
+
 				; 関係マップの更新
 				TMP_COUNTRY_RELATION:(ARG:0):(宗主国) = 0
 				TMP_COUNTRY_RELATION:(宗主国):(ARG:0) = 0
 				TMP_COUNTRY_RELATION_TERM:(ARG:0):(宗主国) = 0
 				TMP_COUNTRY_RELATION_TERM:(宗主国):(ARG:0) = 0
-				
+
 				TREATY_CO_COUNTRY:(LOCAL:0):(LOCAL:2):1 = 0
 			NEXT
 		ENDIF
@@ -3084,22 +3084,22 @@ FOR LOCAL:0, 0, MAX_TREATY_P
 		IF TREATY_P_COUNTRY:(LOCAL:0):(LOCAL:1):0 == ARG:0
 			TREATY_P_COUNTRY:(LOCAL:0):(LOCAL:1):0 = 0
 			COUNTRY_Protectorate:(ARG:0) = 0
-			
+
 			;従属国簡易変数参考リセット
 			COUNTRY_Protectorate_REFERENCE:(ARG:0):0 = 0
 			COUNTRY_Protectorate_REFERENCE:(ARG:0):1 = 0
 			COUNTRY_Protectorate_REFERENCE:(ARG:0):2 = 0
-			
+
 			FOR LOCAL:2, 0, MAX_TREATY_COUNTRY
 				宗主国 = TREATY_P_COUNTRY:(LOCAL:0):(LOCAL:2):1
 				CALL CHECK_NON_Protectorate(宗主国)
-				
+
 				; 関係マップの更新
 				TMP_COUNTRY_RELATION:(ARG:0):(宗主国) = 0
 				TMP_COUNTRY_RELATION:(宗主国):(ARG:0) = 0
 				TMP_COUNTRY_RELATION_TERM:(ARG:0):(宗主国) = 0
 				TMP_COUNTRY_RELATION_TERM:(宗主国):(ARG:0) = 0
-				
+
 				TREATY_P_COUNTRY:(LOCAL:0):(LOCAL:2):1 = 0
 			NEXT
 		ENDIF
@@ -3113,22 +3113,22 @@ FOR LOCAL:0, 0, MAX_TREATY_M
 			TREATY_M_COUNTRY:(LOCAL:0):(LOCAL:1):1 = 0
 			COUNTRY_Protectorate:(ARG:0) = 0
 			IS_TREATY_M:(LOCAL:0) = 0
-			
+
 			;従属国簡易変数参考リセット
 			COUNTRY_Protectorate_REFERENCE:(ARG:0):0 = 0
 			COUNTRY_Protectorate_REFERENCE:(ARG:0):1 = 0
 			COUNTRY_Protectorate_REFERENCE:(ARG:0):2 = 0
-			
+
 			FOR LOCAL:2, 0, MAX_TREATY_COUNTRY
 				従属国 = TREATY_M_COUNTRY:(LOCAL:0):(LOCAL:2):0
 				COUNTRY_Protectorate:従属国 = 0
-				
+
 				; 関係マップの更新
 				TMP_COUNTRY_RELATION:(ARG:0):(従属国) = 0
 				TMP_COUNTRY_RELATION:(従属国):(ARG:0) = 0
 				TMP_COUNTRY_RELATION_TERM:(ARG:0):(従属国) = 0
 				TMP_COUNTRY_RELATION_TERM:(従属国):(ARG:0) = 0
-				
+
 				TREATY_M_COUNTRY:(LOCAL:0):(LOCAL:2):0 = 0
 			NEXT
 		ENDIF
@@ -3141,22 +3141,22 @@ FOR LOCAL:0, 0, MAX_TREATY_CO
 		IF TREATY_CO_COUNTRY:(LOCAL:0):(LOCAL:1):1 == ARG:0
 			TREATY_CO_COUNTRY:(LOCAL:0):(LOCAL:1):1 = 0
 			COUNTRY_Protectorate:(ARG:0) = 0
-			
+
 			;従属国簡易変数参考リセット
 			COUNTRY_Protectorate_REFERENCE:(ARG:0):0 = 0
 			COUNTRY_Protectorate_REFERENCE:(ARG:0):1 = 0
 			COUNTRY_Protectorate_REFERENCE:(ARG:0):2 = 0
-			
+
 			FOR LOCAL:2, 0, MAX_TREATY_COUNTRY
 				従属国 = TREATY_CO_COUNTRY:(LOCAL:0):(LOCAL:2):0
 				COUNTRY_Protectorate:従属国 = 0
-				
+
 				; 関係マップの更新
 				TMP_COUNTRY_RELATION:(ARG:0):(従属国) = 0
 				TMP_COUNTRY_RELATION:(従属国):(ARG:0) = 0
 				TMP_COUNTRY_RELATION_TERM:(ARG:0):(従属国) = 0
 				TMP_COUNTRY_RELATION_TERM:(従属国):(ARG:0) = 0
-				
+
 				TREATY_CO_COUNTRY:(LOCAL:0):(LOCAL:2):0 = 0
 			NEXT
 		ENDIF
@@ -3169,22 +3169,22 @@ FOR LOCAL:0, 0, MAX_TREATY_P
 		IF TREATY_P_COUNTRY:(LOCAL:0):(LOCAL:1):1 == ARG:0
 			TREATY_P_COUNTRY:(LOCAL:0):(LOCAL:1):1 = 0
 			COUNTRY_Protectorate:(ARG:0) = 0
-			
+
 			;従属国簡易変数参考リセット
 			COUNTRY_Protectorate_REFERENCE:(ARG:0):0 = 0
 			COUNTRY_Protectorate_REFERENCE:(ARG:0):1 = 0
 			COUNTRY_Protectorate_REFERENCE:(ARG:0):2 = 0
-			
+
 			FOR LOCAL:2, 0, MAX_TREATY_COUNTRY
 				従属国 = TREATY_P_COUNTRY:(LOCAL:0):(LOCAL:2):0
 				COUNTRY_Protectorate:従属国 = 0
-				
+
 				; 関係マップの更新
 				TMP_COUNTRY_RELATION:(ARG:0):(従属国) = 0
 				TMP_COUNTRY_RELATION:(従属国):(ARG:0) = 0
 				TMP_COUNTRY_RELATION_TERM:(ARG:0):(従属国) = 0
 				TMP_COUNTRY_RELATION_TERM:(従属国):(ARG:0) = 0
-				
+
 				TREATY_P_COUNTRY:(LOCAL:0):(LOCAL:2):0 = 0
 			NEXT
 		ENDIF
@@ -3201,15 +3201,15 @@ FOR LOCAL:0, 0, MAX_COUNTRY
 			TREATY_UNI_COUNTRY:(LOCAL:0):(LOCAL:1):1 = 0
 			IS_TREATY_UNI:(ARG:0) = 0
 		ENDIF
-		
+
 		連邦ナンバー = COUNTRY_Union_REFERENCE:(ARG:0):0
-		
+
 		COUNTRY_Union_REFERENCE:(ARG:0):0 = 0
 		COUNTRY_Union_REFERENCE:(ARG:0):1 = 0
-		
+
 		;(従属国パッチ)1勢力しか所属していない連邦を解体
 		CALL CHECK_NON_Union(連邦ナンバー)
-		
+
 	NEXT
 NEXT
 
@@ -3258,7 +3258,7 @@ NEXT
 LOCAL:2 = CHARANUM
 FOR LOCAL:0, 0, LOCAL:2
 	LOCAL:1 = LOCAL:2 - LOCAL:0 - 1
-	IF CFLAG:(LOCAL:1):所属 == ARG:0 && IS_SP_CHARA(LOCAL:1) && LOCAL:1 != MASTER && CFLAG:(LOCAL:1):1704 == 0
+	IF CFLAG:(LOCAL:1):所属 == ARG:0 && IS_SP_CHARA(LOCAL:1) && LOCAL:1 != MASTER && 記念品である:(LOCAL:1):0 == 0
 		CALL DELETE_CHARA(LOCAL:1)
 	ENDIF
 NEXT
@@ -3270,7 +3270,7 @@ IF IS_SP_COUNTRY(ARG:0)
 		LOCAL:1 = CHARANUM
 		FOR LOCAL:0, 0, LOCAL:1
 			LOCAL:2 = LOCAL:1 - LOCAL:0 - 1
-			IF TALENT:(LOCAL:2):特殊勢力素質 == SP_COUNTRY_TO_CONST(ARG:0) && IS_SP_CHARA(LOCAL:2) && LOCAL:2 != MASTER && CFLAG:(LOCAL:2):1704 == 0
+			IF TALENT:(LOCAL:2):特殊勢力素質 == SP_COUNTRY_TO_CONST(ARG:0) && IS_SP_CHARA(LOCAL:2) && LOCAL:2 != MASTER && 記念品である:(LOCAL:2):0 == 0
 				CALL DELETE_CHARA(LOCAL:2)
 			ENDIF
 		NEXT
@@ -3330,7 +3330,12 @@ RETURNF INRANGE(ARG,0, MAX_COUNTRY-1)
 
 @INRANGE_UNIT(ARG)
 #FUNCTION
-RETURNF INRANGE(ARG,0, MAX_UNIT-1)
+;(ホフゴブリン拡張パッチ)略奪部隊(部隊ナンバー100)に対応
+IF (ARG >= 0 && ARG <= MAX_UNIT-1) || ARG == 100
+	RETURNF 1
+ELSE
+	RETURNF 0
+ENDIF
 
 @INRANGE_UNIT_COMMANDER(ARG)
 #FUNCTION
@@ -3373,7 +3378,7 @@ SIF GET_CITY_COMMANDER(ARG:1, 0) >= 0
 SIF GET_CITY_COMMANDER(ARG:1, 1) >= 0
 	COOLTIME:GET_CITY_COMMANDER(ARG:1, 1):0 = 1
 CITY_COMMANDER:(ARG:1) = 0
-SIF IS_COUNTRY(CITY_OWNER:(ARG:1)) 
+SIF IS_COUNTRY(CITY_OWNER:(ARG:1))
 	COUNTRY_SOLDIER:(CITY_OWNER:(ARG:1)) += MAX(CITY_SOLDIER:(ARG:1) - 500, 500)
 CITY_SOLDIER:(ARG:1) = MIN(CITY_SOLDIER:(ARG:1), 500)
 

@@ -1224,17 +1224,17 @@ ENDSELECT
 
 ホフゴブリン = CHANGE_Government_GOBLIN:0
 SIF ホフゴブリン == 0
-        ホフゴブリン = GET_COUNTRY_FROM_ID(SP_COUNTRY_ID:特殊勢力_ホフゴブリン)
+	ホフゴブリン = GET_COUNTRY_FROM_ID(SP_COUNTRY_ID:特殊勢力_ホフゴブリン)
 IF IS_COUNTRY(ホフゴブリン)
-        IF (勝利部隊 >= 0 && 勝利勢力 == ホフゴブリン) || (勝利部隊 < 0 && CITY_OWNER:勝利勢力 == ホフゴブリン)
-                ホフゴブリン勝利 = 1
-                SIF 敗北部隊 == -1
-                        CFLAG:(GET_COUNTRY_BOSS(ホフゴブリン)):1709 += 10
-        ELSEIF (敗北部隊 >= 0 && 敗北勢力 == ホフゴブリン) || (敗北部隊 < 0 && CITY_OWNER:敗北勢力 == ホフゴブリン)
-                ホフゴブリン敗北 = 1
-                SIF 敗北部隊 == -1
-                        CFLAG:(GET_COUNTRY_BOSS(ホフゴブリン)):1709 = MAX(1, CFLAG:(GET_COUNTRY_BOSS(ホフゴブリン)):1709 - 10)
-        ENDIF
+    IF (勝利部隊 >= 0 && 勝利勢力 == ホフゴブリン) || (勝利部隊 < 0 && CITY_OWNER:勝利勢力 == ホフゴブリン)
+        ホフゴブリン勝利 = 1
+        SIF 敗北部隊 == -1
+            ゴブリン支持率:(GET_COUNTRY_BOSS(ホフゴブリン)):0 += 10
+    ELSEIF (敗北部隊 >= 0 && 敗北勢力 == ホフゴブリン) || (敗北部隊 < 0 && CITY_OWNER:敗北勢力 == ホフゴブリン)
+        ホフゴブリン敗北 = 1
+        SIF 敗北部隊 == -1
+            ゴブリン支持率:(GET_COUNTRY_BOSS(ホフゴブリン)):0 = MAX(1, ゴブリン支持率:(GET_COUNTRY_BOSS(ホフゴブリン)):0 - 10)
+    ENDIF
 ENDIF
 
 
@@ -1249,7 +1249,7 @@ FOR LOCAL, 0, BATTLE_COMMANDER_NUM:勝利側
 	SIF BATTLE_SUMMONED_CHARA:勝利側:LOCAL
 		BATTLE_COMMANDER:勝利側:LOCAL = -1
 	SIF ホフゴブリン勝利 == 1 && BATTLE_COMMANDER:勝利側:LOCAL > -1
-		CFLAG:(BATTLE_COMMANDER:勝利側:LOCAL):1709 += 10
+		ゴブリン支持率:(BATTLE_COMMANDER:勝利側:LOCAL):0 += 10
 NEXT
 
 ;召喚キャラは関わらない
@@ -1258,7 +1258,7 @@ FOR LOCAL, 0, BATTLE_COMMANDER_NUM:敗北側
 	SIF BATTLE_SUMMONED_CHARA:敗北側:LOCAL
 		BATTLE_COMMANDER:敗北側:LOCAL = -1
 	SIF ホフゴブリン敗北 == 1 && BATTLE_COMMANDER:敗北側:LOCAL > -1
-		CFLAG:(BATTLE_COMMANDER:敗北側:LOCAL):1709 = MAX(1, CFLAG:(BATTLE_COMMANDER:敗北側:LOCAL):1709 - 10)
+		ゴブリン支持率:(BATTLE_COMMANDER:敗北側:LOCAL):0 = MAX(1, ゴブリン支持率:(BATTLE_COMMANDER:敗北側:LOCAL):0 - 10)
 NEXT
 
 CALL UNIT_BREAK_DIE(勝利側, 勝利勢力, 勝利部隊, 敗北勢力, 敗北部隊, COUNTRY_W, COUNTRY_L)
@@ -1603,6 +1603,18 @@ SIF GET_DEVELOPMENT_COUNT(建造物_本拠地, CITY_OWNER:(ARG:0)) > 0
 	追加倍率 += 7
 SIF TECHNOLOGY_STATUS:(CITY_OWNER:(ARG:0)):TECHNOLOGY_BATTLE_PASSIVE >= 2
 	追加倍率 += 7
+;(従属国パッチ)継続方針：防衛布告を採用中は防衛倍率を+0.05
+SIF CONTINUOUS_FOCUS:(CITY_OWNER:(ARG:0)) == 2
+	追加倍率 += 5
+
+;(触手勢力拡張パッチ)都市が触手勢力であるとき共感レベルにより防衛倍率上昇
+IF CITY_OWNER:(ARG:0) == GET_COUNTRY_FROM_ID(SP_COUNTRY_ID:特殊勢力_触手) || (CITY_OWNER:(ARG:0) == CHANGE_Government_TENTACLE:0 && CHANGE_Government_TENTACLE:1 == 2 && IS_COUNTRY(CHANGE_Government_TENTACLE:0))
+	SIF TENTACLE_SYMPATHY_LV >= 4
+		追加倍率 += 20
+	SIF TENTACLE_SYMPATHY_LV >= 5
+		追加倍率 += 20
+ENDIF
+
 LOCAL:0 = CITY_GUARD:(ARG:0) * (CITY_ECONOMY:(ARG:0) / 50 + 10000) * 追加倍率 / 10000
 
 SIF IS_COUNTRY(CITY_OWNER:(ARG:0)) && COUNTRY_POLICY:(CITY_OWNER:(ARG:0)) == 政策_防衛

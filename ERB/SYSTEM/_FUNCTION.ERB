@@ -2789,7 +2789,7 @@ ENDIF
 @PRINT_RESTMARK(ARG:0)
 LOCAL = GETCOLOR()
 IF ARG:0 == MASTER
-	PRINTFORM %TOSTR_SPACE(2)%
+	PRINT
 	RETURN
 ELSEIF CFLAG:(ARG:0):行動済み
 	SETCOLOR 0xD0D0D0
@@ -3436,8 +3436,7 @@ SIF FINDELEMENT(SCOUT_CANDIDATES, GET_ID(対象)) != -1
 #DIM 対象
 #DIM 勢力番号
 #DIM 死亡フラグ
-SIF !IS_COUNTRY(勢力番号) && 勢力番号 != 0
-	THROW CAPTURE国家ID非法 输入的国家ID:{勢力番号} 请向制作者汇报报错的函数栈
+
 ;軟禁中はあとで手動で指定してね
 CFLAG:対象:軟禁中 = 0
 
