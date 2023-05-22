@@ -286,6 +286,9 @@ ENDIF
 
 持ち出し額 = MONEY:勢力 * AI_DIPLOMACY_PROPERTY:(COUNTRY_AI_TYPE:勢力):AI_外交_会談支払額 / 100
 
+;跳转信仰事件
+TRYCALL SHOP_LIFE_USERSHOP68_CONFERENCE(勢力,相手勢力,持ち出し額)
+
 ;金銭授受
 MONEY:勢力 -= 持ち出し額
 MONEY:相手勢力 += 持ち出し額
@@ -339,7 +342,7 @@ SIF TECHNOLOGY_STATUS:勢力:TECHNOLOGY_DIPLOMACY >= 3
 IF 相手勢力 == CFLAG:MASTER:所属 && !CONFIG:302
 	CALL SLG_DIPLOMACY_TO_PLAYER(勢力, AI_外交計画_停戦)
 	SIF RESULT == 0
-		RETURN 
+		RETURN
 ELSE
 	PRINTFORM %ANAME(君主)%嘗試和%ANAME(相手勢力君主)%停戦
 	;相手の外交対象に入っておらず、かつ乱数判定に失敗したら拒否フラグがたつ
@@ -375,7 +378,8 @@ CALL CLEAR_AI_DIPLOMACY_PLAN(相手勢力, 勢力)
 ;金銭授受
 MONEY:勢力 -= 持ち出し額
 MONEY:相手勢力 += 持ち出し額
-
+;跳转信仰事件
+TRYCALL SHOP_LIFE_USERSHOP68_CEASE_FIRE(勢力,相手勢力,効果量,持ち出し額)
 ;------------------------
 ;同盟を試みる
 ;------------------------
@@ -418,7 +422,7 @@ SIF TECHNOLOGY_STATUS:勢力:TECHNOLOGY_DIPLOMACY >= 3
 IF 相手勢力 == CFLAG:MASTER:所属 && !CONFIG:302
 	CALL SLG_DIPLOMACY_TO_PLAYER(勢力, AI_外交計画_同盟)
 	SIF RESULT == 0
-		RETURN 
+		RETURN
 ELSE
 	PRINTFORM %ANAME(君主)%嘗試和%ANAME(相手勢力君主)%結盟
 	;相手の外交対象に入っておらず、かつ乱数判定に失敗したら拒否フラグがたつ
@@ -455,8 +459,8 @@ CALL CLEAR_AI_DIPLOMACY_PLAN(相手勢力, 勢力)
 ;金銭授受
 MONEY:勢力 -= 持ち出し額
 MONEY:相手勢力 += 持ち出し額
-
-
+;跳转信仰事件
+TRYCALL SHOP_LIFE_USERSHOP68_ALLIANCE(勢力,相手勢力,効果量,持ち出し額)
 ;------------------------
 ;悪評を流す
 ;------------------------
@@ -545,7 +549,8 @@ FOR LOCAL, 0, 対象数
 NEXT
 
 DIPLOMACY_HATE:勢力 += RAND:2
-
+;跳转信仰事件
+TRYCALL SHOP_LIFE_USERSHOP68_SCANDAL(勢力,相手勢力,0)
 
 ;------------------------
 ;要求
@@ -657,7 +662,8 @@ ENDSELECT
 
 DIPLOMACY_HATE:勢力 += 3
 CALL CLEAR_AI_DIPLOMACY_PLAN(勢力, 相手勢力)
-
+;跳转信仰事件
+TRYCALL SHOP_LIFE_USERSHOP68_REQUEST(勢力,相手勢力,内容,効果量)
 
 
 ;------------------------
@@ -881,7 +887,8 @@ TREATY_U_TERM:連合番号 = LIMIT((REL_HATE:勢力君主:相手勢力君主 - R
 TREATY_U_TARGET:連合番号 = 相手勢力
 
 CALL ICPRINT(@"連盟的持續時間為<{TREATY_U_TERM:連合番号}>回合", "L", カラー_注意)
-
+;跳转信仰事件
+TRYCALL SHOP_LIFE_USERSHOP68_UNION(勢力,相手勢力,参加勢力数)
 FORCEWAIT
 
 ;------------------------
@@ -948,7 +955,7 @@ CALL COLOR_PRINTL(@"%ANAME(君主)%提出了%内容:計画%申請", カラー_�
 PRINTFORML 怎麼辦？
 CALL ASK_MULTI_JUDGE("接受", 1, "拒絶", 1, "索要兵力", 1, "索要経済力", 1, "調教対方", CFLAG:君主:外交調教カウンタ == 0)
 
-SELECTCASE RESULT 
+SELECTCASE RESULT
 	CASE 0
 		PRINTFORML 決定同意了%内容:計画%
 		RETURN 1

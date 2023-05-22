@@ -225,8 +225,8 @@ IF 選択 == 1 && 選択可能フラグ == 1
 	IF RESULT == 0
 		CALL CHANGE_COUNTRY(加工元士官, 0, 0, 0)
 		CFLAG:加工元士官:特殊状態 = 0
-		CFLAG:加工元士官:捕虜先 = CFLAG:MASTER:所属
-
+		; CFLAG:加工元士官:捕虜先 = CFLAG:MASTER:所属
+		CALL CAPTURE(加工元士官,CFLAG:MASTER:所属)
 		IS_GOODS_EXECUTED:加工元識別ナンバー = 0
 		NAME_BEFORE_GOODS_EXECUTED:加工元識別ナンバー = 0
 		TYPE_GOODS_EXECUTED:加工元識別ナンバー:種類:子供フラグ = 0

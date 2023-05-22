@@ -100,7 +100,7 @@ COUNTRY_SOLDIER:勢力 += COUNTRY_SOLDIER:相手勢力
 COUNTRY_SOLDIER:相手勢力 = 0
 
 ;領地の接収
-PRINTL 
+PRINTL
 SETCOLOR カラー_注意
 PRINTFORML %ANAME(相手君主)%所佔領的城市変成了我国的領土
 RESETCOLOR
@@ -112,13 +112,13 @@ FOR LOCAL:0, 0, MAX_CITY
 NEXT
 WAIT
 
-PRINTL 
+PRINTL
 PRINTFORMW %ANAME(相手君主)%軍的士兵加入了我国的兵力之中
 
 ;自動で登用
 IF CONFIG:303 == 0
 	;士官の組み込み
-	PRINTL 
+	PRINTL
 	SETCOLOR カラー_注意
 	PRINTFORML 所属於%ANAME(相手君主)%的士官被編入了我国的士官
 	RESETCOLOR
@@ -142,7 +142,7 @@ IF CONFIG:303 == 0
 ;自動で投獄
 ELSEIF CONFIG:303 == 1
 	;士官の組み込み
-	PRINTL 
+	PRINTL
 	SETCOLOR カラー_注意
 	PRINTFORML 所属於%ANAME(相手君主)%的士官被投入了大牢
 	RESETCOLOR

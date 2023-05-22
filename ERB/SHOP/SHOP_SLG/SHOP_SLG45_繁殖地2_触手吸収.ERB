@@ -93,7 +93,7 @@ ELSEIF RESULT == 900 && 吸収可能苗床 >= 2
 					IS_GOODS_EXECUTED:加工元識別ナンバー = 1
 					NAME_BEFORE_GOODS_EXECUTED:加工元識別ナンバー = 吸収対象
 
-					NAME_AFTER_GOODS_EXECUTED:加工元識別ナンバー:7 = 「%ANAME(吸収対象)%」から取り出された生命の素
+					NAME_AFTER_GOODS_EXECUTED:加工元識別ナンバー:7 = 从「%ANAME(吸収対象)%」身上提取的生命之素
 					TYPE_GOODS_EXECUTED:加工元識別ナンバー:7:0 = 1
 					HAVE_GOODS_EXECUTED:7 += 1
 					NAME_FATHER_FETUS:加工元識別ナンバー = CFLAG:吸収対象:子の父親
@@ -151,7 +151,7 @@ ELSEIF 触手勢力に監禁:RESULT:0 >= 1 && (GETBIT(TALENT:RESULT:特殊勢力
 			IS_GOODS_EXECUTED:加工元識別ナンバー = 1
 			NAME_BEFORE_GOODS_EXECUTED:加工元識別ナンバー = 吸収対象
 
-			NAME_AFTER_GOODS_EXECUTED:加工元識別ナンバー:7 = 「%ANAME(吸収対象)%」から取り出された生命の素
+			NAME_AFTER_GOODS_EXECUTED:加工元識別ナンバー:7 = 从「%ANAME(吸収対象)%」身上提取的生命之素
 			TYPE_GOODS_EXECUTED:加工元識別ナンバー:7:0 = 1
 			HAVE_GOODS_EXECUTED:7 += 1
 			NAME_FATHER_FETUS:加工元識別ナンバー = CFLAG:吸収対象:子の父親

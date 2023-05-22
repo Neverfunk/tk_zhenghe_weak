@@ -3453,12 +3453,13 @@ RETURNF "不明"
 
 IF ARG:2
 	CALL COLOR_PRINTL(@"%ANAME(ARG:0)%的治疗時間為{ARG:1}回合", カラー_注意)
-	SIF ARG:0 == MASTER && ITEM:替身人偶 > 0 && COOLTIME:MASTER:0 < ARG:1
-		CALL COLOR_PRINTL(@"……但是、替身人偶成為了替身(残り:{ITEM:替身人偶 - 1}個)", カラー_注意)
 	IF TALENT:(ARG:0):強運 && RAND:2
 		CALL COLOR_PRINTL(@"……但是、幸運的成功回避了", カラー_注意)
 		RETURN
 	ENDIF
+	;捉虫:避免玩家误解替身人偶被消耗
+	SIF ARG:0 == MASTER && ITEM:替身人偶 > 0 && COOLTIME:MASTER:0 < ARG:1
+		CALL COLOR_PRINTL(@"……但是、替身人偶成為了替身(残り:{ITEM:替身人偶 - 1}個)", カラー_注意)
 ENDIF
 
 IF ARG:0 == MASTER && ITEM:替身人偶 > 0 && COOLTIME:MASTER:0 < ARG:1
@@ -3475,12 +3476,13 @@ ENDIF
 
 IF ARG:2
 	CALL COLOR_PRINTL(@"%ANAME(ARG:0)%的休息時間増加了{ARG:1}回合", カラー_注意)
-	SIF ARG:0 == MASTER && ITEM:替身人偶 > 0
-		CALL COLOR_PRINTL(@"……但是、替身人偶成為了替身(残り:{ITEM:替身人偶 - 1}個)", カラー_注意)
 	IF TALENT:(ARG:0):強運 && RAND:2
 		CALL COLOR_PRINTL(@"……但是、幸運的成功回避了", カラー_注意)
 		RETURN
 	ENDIF
+	;捉虫:避免玩家误解替身人偶被消耗
+	SIF ARG:0 == MASTER && ITEM:替身人偶 > 0
+		CALL COLOR_PRINTL(@"……但是、替身人偶成為了替身(残り:{ITEM:替身人偶 - 1}個)", カラー_注意)
 ENDIF
 
 IF ARG:0 == MASTER && ITEM:替身人偶 > 0
@@ -3490,6 +3492,7 @@ ELSE
 	SIF ARG:3
 		CALL FORCE_FREE(ARG:0)
 ENDIF
+
 
 ;-------------------------------------------------
 ;ARG:0番の都市について駐留部隊を含めた防衛兵力を返す関数

@@ -70,16 +70,16 @@ RETURN 1
 IF 対象部隊 < 0
 	交戦相手方勢力 = CITY_OWNER:対象勢力
 	PRINTFORML %ANAME(発動者)%所弹奏的歌在%GET_RELAYNAME(対象勢力)%处不停传唱…
-	
+
 	TIMES BATTLE_DEF:発動側, 1.40
 	CALL DIPLOMACY_IMPROVE_RELATION(交戦相手方勢力, 50)
 ELSE
 	交戦相手方勢力 = 対象勢力
 	PRINTFORML %ANAME(発動者)%所弹奏的歌响彻战场…
-	
+
 	TIMES BATTLE_DEF:発動側, 1.40
 	CALL DIPLOMACY_IMPROVE_RELATION(交戦相手方勢力, 50)
-	
+
 ENDIF
 
 @SKILL_10202_TROOP_0_EXPLANATION

@@ -78,11 +78,11 @@ SIF GETBIT(TALENT:(ARG:0):淫乱系, 素質_淫乱_良質母胎)
 
 ;★デバッグ用(100%妊娠)
 ;LOCAL:5 = 1
-
-CALL PRINT_IMAGE_ANIMATION("implant",0,7,3,1)
-CALL PRINT_IMAGE_ANIMATION("implant",0,3,1,0)
-CALL PRINT_IMAGE("implant2")
-
+IF CONFIG:557
+	CALL PRINT_IMAGE_ANIMATION("implant",0,7,3,1)
+	CALL PRINT_IMAGE_ANIMATION("implant",0,3,1,0)
+	CALL PRINT_IMAGE("implant2")
+ENDIF
 IF RAND:(LOCAL:5) < SQRT(LOCAL:2 * 100 + 300)
 	;誰の子供かを判定
 	LOCAL:3 = RAND:(LOCAL:2)
@@ -97,9 +97,10 @@ IF RAND:(LOCAL:5) < SQRT(LOCAL:2 * 100 + 300)
 			CALL RECORD_FATHER_FROM_CREAMPIE_HISTORY(ARG:0)
 			;妊娠発覚
 			CALL DETECT_PREGNANCY(ARG:0)
-			CALL PRINT_IMAGE_ANIMATION("implant",0,12,5,0)
-			CALL PRINT_IMAGE("implant11")
-
+			IF CONFIG:557
+				CALL PRINT_IMAGE_ANIMATION("implant",0,12,5,0)
+				CALL PRINT_IMAGE("implant11")
+			ENDIF
 
 			BREAK
 		ENDIF
@@ -150,6 +151,8 @@ NEXT
 ;---------------------------------------------------------
 @TURNEND_PREGNANT_CHECK_MOTHER(ARG:0)
 
+CALL UPDATE_CREAMPIE_HISTORY(ARG:0)
+
 ;出産後
 IF CFLAG:(ARG:0):育児期間 >= 1
 	;出産後期間を進める
@@ -171,7 +174,6 @@ ENDIF
 
 ;妊娠していない
 IF TALENT:(ARG:0):妊娠 == 0
-	CALL UPDATE_CREAMPIE_HISTORY(ARG:0)
 	CALL CHECK_PREGNANT(ARG:0)
 ;妊娠中
 ELSE
@@ -531,7 +533,8 @@ IF IS_PREGNANT_MSG(MOTHER)
 			CALL ASK_YN("投狱", "不投狱")
 			;TranslatedMark "投獄する", "投獄しない"
 			IF RESULT == 0
-				CFLAG:CHILD:捕虜先 = CFLAG:MASTER:所属
+				; CFLAG:CHILD:捕虜先 = CFLAG:MASTER:所属
+				CALL CAPTURE(CHILD,CFLAG:MASTER:所属)
 				子供捕虜:CHILD:0 = 1
 				PRINTFORMW 被关进了监狱
 				;TranslatedMark 投獄しました

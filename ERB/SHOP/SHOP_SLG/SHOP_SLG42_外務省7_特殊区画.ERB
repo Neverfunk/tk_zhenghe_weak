@@ -867,6 +867,10 @@ ENDIF
 SIF GETBIT(TALENT:(ARG:0):淫乱系, 素質_淫乱_良質母胎)
 	増加量 = 増加量 * 2
 
+SETCOLOR カラー_注意
+PRINTFORML %ANAME(ARG:0)%产出了士兵[{増加量}人]
+RESETCOLOR
+
 出産数 = 増加量
 
 COUNTRY_SOLDIER:(設置勢力) += 増加量

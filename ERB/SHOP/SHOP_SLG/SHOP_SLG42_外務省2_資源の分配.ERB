@@ -917,8 +917,8 @@ IF RESULT == 1
 	GOTO CHARA_LIST_LOOP
 ENDIF
 
-CFLAG:対象:捕虜先 = 自国勢力
-
+; CFLAG:対象:捕虜先 = 自国勢力
+CALL CAPTURE(対象,自国勢力)
 PRINTFORML %ANAME(対象)%成为了%ANAME(自国勢力名)%势力的俘虏
 
 RETURN 1

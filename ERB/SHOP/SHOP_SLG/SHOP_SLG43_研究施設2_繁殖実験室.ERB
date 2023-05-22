@@ -108,7 +108,7 @@ ELSEIF RESULT == 1001 && 一括取出可能フラグ == 1
 				IS_GOODS_EXECUTED:加工元識別ナンバー = 1
 				NAME_BEFORE_GOODS_EXECUTED:加工元識別ナンバー = LOCAL:0
 
-				NAME_AFTER_GOODS_EXECUTED:加工元識別ナンバー:7 = 「%ANAME(LOCAL:0)%」から取り出された生命の素
+				NAME_AFTER_GOODS_EXECUTED:加工元識別ナンバー:7 = 从「%ANAME(LOCAL:0)%」身上提取的生命之素
 				TYPE_GOODS_EXECUTED:加工元識別ナンバー:7:0 = 1
 				HAVE_GOODS_EXECUTED:7 += 1
 				NAME_FATHER_FETUS:加工元識別ナンバー = CFLAG:(LOCAL:0):子の父親
@@ -340,7 +340,8 @@ FOR 加工元識別ナンバー, 0, 999
 		PRINTFORMW 要作为实验对象监禁起来吗？
 		CALL ASK_YN("监禁", "不监禁")
 		IF RESULT == 0
-			CFLAG:新生児:捕虜先 = CFLAG:MASTER:所属
+			;CFLAG:新生児:捕虜先 = CFLAG:MASTER:所属
+			CALL CAPTURE(新生児,CFLAG:MASTER:所属)
 			子供捕虜:新生児:0 = 1
 			PRINTFORMW 被关进了监狱
 		ENDIF

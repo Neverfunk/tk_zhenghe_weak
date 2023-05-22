@@ -233,37 +233,46 @@ ELSEIF RESULT == 1001 && 勢力 == CFLAG:MASTER:所属 && IS_TECHNOLOGY_RESEARCH
 		PRINTFORMW 研究开始了
 	ENDIF
 ELSEIF RESULT == 1002 && 表示中継続方針 >= 5001 && 表示中継続方針 <= 5003
-	PRINTFORML 継続方針：採用中効果発揮
+	PRINTFORML 继续方针：效果已经生效
+	;TranslatedMark 継続方針：採用中効果発揮
 	PRINTL
-	PRINTFORML 継続方針を採用しますか？（現在研究中の進捗状況はリセットされます）
+	PRINTFORML 是否采用继续方针？（目前正在进行的研究的进度将被重置）
+	;TranslatedMark 継続方針を採用しますか？（現在研究中の進捗状況はリセットされます）
 	CALL ASK_YN()
 	IF RESULT == 0 && CONTINUOUS_FOCUS:(CFLAG:MASTER:所属) != 表示中継続方針 - 5000
 		CONTINUOUS_FOCUS:(CFLAG:MASTER:所属) = 表示中継続方針 - 5000
 		TECHNOLOGY_RESEARCH_TARGET:勢力 = -1
 		TECHNOLOGY_RESEARCH_PROGRESS:勢力 = 0
-		PRINTFORMW 継続方針を採用しました
+		PRINTFORMW 采用了继续方针
+		;TranslatedMark 継続方針を採用しました
 	ENDIF
 ELSEIF RESULT == 1002 && 表示中継続方針 == 5004 && COUNTRY_Protectorate:(CFLAG:MASTER:所属) == 1
-	PRINTFORML 継続方針：採用中効果発揮
+	PRINTFORML 继续方针：效果已经生效
+	;TranslatedMark 継続方針：採用中効果発揮
 	PRINTL
-	PRINTFORML 継続方針を採用しますか？（現在研究中の進捗状況はリセットされます）
+	PRINTFORML 是否采用继续方针？（目前正在进行的研究的进度将被重置）
+	;TranslatedMark 継続方針を採用しますか？（現在研究中の進捗状況はリセットされます）
 	CALL ASK_YN()
 	IF RESULT == 0 && CONTINUOUS_FOCUS:(CFLAG:MASTER:所属) != 4
 		CONTINUOUS_FOCUS:(CFLAG:MASTER:所属) = 4
 		TECHNOLOGY_RESEARCH_TARGET:勢力 = -1
 		TECHNOLOGY_RESEARCH_PROGRESS:勢力 = 0
-		PRINTFORMW 継続方針を採用しました
+		PRINTFORMW 采用了继续方针
+		;TranslatedMark 継続方針を採用しました
 	ENDIF
 ELSEIF RESULT == 1002 && 表示中継続方針 == 5005 && COUNTRY_Protectorate:(CFLAG:MASTER:所属) >= 2
-	PRINTFORML 継続方針：採用中効果発揮
+	PRINTFORML 继续方针：效果已经生效
+	;TranslatedMark 継続方針：採用中効果発揮
 	PRINTL
-	PRINTFORML 継続方針を採用しますか？（現在研究中の進捗状況はリセットされます）
+	PRINTFORML 是否采用继续方针？（目前正在进行的研究的进度将被重置）
+	;TranslatedMark 継続方針を採用しますか？（現在研究中の進捗状況はリセットされます）
 	CALL ASK_YN()
 	IF RESULT == 0 && CONTINUOUS_FOCUS:(CFLAG:MASTER:所属) != 5
 		CONTINUOUS_FOCUS:(CFLAG:MASTER:所属) = 5
 		TECHNOLOGY_RESEARCH_TARGET:勢力 = -1
 		TECHNOLOGY_RESEARCH_PROGRESS:勢力 = 0
-		PRINTFORMW 継続方針を採用しました
+		PRINTFORMW 采用了继续方针
+		;TranslatedMark 継続方針を採用しました
 	ENDIF
 ELSEIF RESULT >= 5001 && RESULT <= 5005
 	表示中継続方針 = RESULT
