@@ -1181,10 +1181,11 @@ IF RESULT > COUNTRY_SOLDIER:(ARG:0)
 	GOTO SHOW_LOOP
 ENDIF
 
-補充兵数 = COUNTRY_SOLDIER:(ARG:0)
-補充兵数 = 補充兵数 - (補充兵数 % 補充可能部隊数)
+補充兵数 = RESULT
+端数 = 補充兵数 % 補充可能部隊数
+補充兵数 -= 端数
 
-補充兵数 = 補充兵数 / 補充可能部隊数
+LOCAL:2 = 0
 
 FOR LOCAL, 0, MAX_UNIT
 	SIF UNIT_SOLDIER:(ARG:0):LOCAL <= 0
@@ -1195,8 +1196,14 @@ FOR LOCAL, 0, MAX_UNIT
 	SIF IS_STAY_ENEMY_UNIT(UNIT_POSITION:(ARG:0):(LOCAL:0))
 		LOCAL:1 = 0
 	IF LOCAL:1
-		UNIT_SOLDIER:(ARG:0):LOCAL += 補充兵数
-		COUNTRY_SOLDIER:(ARG:0) -= 補充兵数
+		UNIT_SOLDIER:(ARG:0):LOCAL += 補充兵数 / 補充可能部隊数
+		COUNTRY_SOLDIER:(ARG:0) -= 補充兵数 / 補充可能部隊数
+		補充兵数 -=  補充兵数 / 補充可能部隊数
+		IF LOCAL:2 == 0
+			UNIT_SOLDIER:(ARG:0):LOCAL += 端数
+			補充兵数 -= 端数
+			LOCAL:2 = 1
+		ENDIF
 	ENDIF
 NEXT
 

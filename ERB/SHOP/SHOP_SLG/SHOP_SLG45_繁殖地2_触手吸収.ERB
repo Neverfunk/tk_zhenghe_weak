@@ -76,7 +76,7 @@ ELSEIF RESULT == 900 && 吸収可能苗床 >= 2
 				触手処刑非表示フラグ = 1
 
 				;(画像パッチ)
-				;CALL 画像表示(吸収対象, 2, 4)
+				CALL 画像表示(吸収対象, 2, 4)
 				CALL KOJO_EVENT(吸収対象, 343)
 
 				PRINTFORMW %ANAME(吸収対象)%被吞入了蠢动着的肉块之中……
@@ -134,7 +134,7 @@ ELSEIF 触手勢力に監禁:RESULT:0 >= 1 && (GETBIT(TALENT:RESULT:特殊勢力
 		触手処刑非表示フラグ = 1
 
 		;(画像パッチ)
-		; CALL 画像表示(吸収対象, 2, 4)
+		CALL 画像表示(吸収対象, 2, 4)
 		CALL KOJO_EVENT(吸収対象, 343)
 
 		PRINTFORMW 剥成全裸的%ANAME(吸収対象)%被吞入了蠢动的肉块之中……
@@ -214,7 +214,7 @@ FOR 苗床, 0, CHARANUM
 		CONTINUE
 
 	;(画像パッチ)
-	; CALL 画像表示(苗床, 3, 4)
+	CALL 画像表示(苗床, 3, 4)
 	PRINTFORML %ANAME(苗床)%被困在肉块之中……
 	PRINTFORML 触手在%ANAME(苗床)%的每一个洞中出入，不停榨取着力量
 	IF HAS_PENIS(苗床)
