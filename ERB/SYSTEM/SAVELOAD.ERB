@@ -313,7 +313,7 @@ ENDIF
 
 
 ;-------------------------------------------------
-;クリアデータをロードしたときの引継ぎ処理
+;加载周回档数据时的交接处理
 ;-------------------------------------------------
 @PASS_SETTING
 #DIM LCOUNT, 2
@@ -323,7 +323,7 @@ ENDIF
 #DIM ITEM保存, VARSIZE("ITEM")
 VARSET LOCAL, 0
 
-;出産後のキャラがいる場合、状態をリセット
+;有产后角色的情况下，重置状态
 FOR LOCAL:0, 0, CHARANUM
 	IF CFLAG:(LOCAL:0):育児期間 >= 1
 		;出産後の各種初期化処理
@@ -331,7 +331,7 @@ FOR LOCAL:0, 0, CHARANUM
 	ENDIF
 NEXT
 
-;キャラの情報を一部リセット
+;重置角色的部分信息
 FOR LOCAL:0, 0, CHARANUM
 	CFLAG:(LOCAL:0):所属 = 0
 	CFLAG:(LOCAL:0):捕虜先 = 0
@@ -357,7 +357,7 @@ FOR LOCAL:0, 0, CHARANUM
 	BASE:(LOCAL:0):精神力 = MAXBASE:(LOCAL:0):精神力
 NEXT
 
-;キャラ間の好感度・敵対度のクリア
+;清除角色间的好感度和敌对度
 FOR LOCAL:0, 0, CHARANUM
 	FOR LOCAL:1, 0, VARSIZE("REL_LIKE")
 		REL_LIKE:(LOCAL:0):(LOCAL:1) = 0
@@ -365,7 +365,7 @@ FOR LOCAL:0, 0, CHARANUM
 	NEXT
 NEXT
 
-;特殊キャラの削除　ただし主人公だったら削除しない（引継ぎ後に問題になるので）
+;特殊角色的删除但是如果是主人公的话就不会删除（因为继承后会成为问题）
 FOR LOCAL:0, CHARANUM - 1, -1, -1
 	IF IS_SP_CHARA(LOCAL) && LOCAL != MASTER
 		CALL DELETE_CHARA(LOCAL:0)
@@ -413,7 +413,7 @@ MONEY = MIN(MONEY / 10, 1000000)
 
 ITEMSALES:太平要術之書 = 1
 ITEM:太平要術之書 = 0
-
+ARENA_DONE = 0
 IF ID_TO_CHARA(FLAG:お気に入り指定キャラ) != -1
 	PRINTFORML 指定的最愛角色要初期化麼？
 	CALL ASK_YN
