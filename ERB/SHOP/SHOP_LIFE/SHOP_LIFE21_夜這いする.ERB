@@ -30,14 +30,16 @@ RETURN 1
 ;-------------------------------------------------
 @SHOP_LIFE_CHECKCHARA21(ARG:0)
 ;隣接している都市がある
+SIF SHOP_LIFE_21_FILTER_COUNTRY >= 0 && CFLAG:(ARG:0):所属 != SHOP_LIFE_21_FILTER_COUNTRY
+	RETURN 0
 IF !CFLAG:MASTER:所属 || TMP_COUNTRY_IS_NEIBORING:(CFLAG:MASTER:所属):(CFLAG:(ARG:0):所属) || CFLAG:(ARG:0):特殊状態 == 特殊状態_放浪
 	;非主人公、捕虜ではない、別勢力、どこかの勢力に所属している（放浪、未登場、死亡済みではない）
 	{
 		IF ARG:0 != MASTER &&
-			!CFLAG:(ARG:0):捕虜先 && 
-			CFLAG:MASTER:所属 != CFLAG:(ARG:0):所属 && 
-			(CFLAG:(ARG:0):所属 || CFLAG:(ARG:0):特殊状態 == 特殊状態_放浪) && 
-			!IS_SP_CHARA(ARG:0) && 
+			!CFLAG:(ARG:0):捕虜先 &&
+			CFLAG:MASTER:所属 != CFLAG:(ARG:0):所属 &&
+			(CFLAG:(ARG:0):所属 || CFLAG:(ARG:0):特殊状態 == 特殊状態_放浪) &&
+			!IS_SP_CHARA(ARG:0) &&
 			CFLAG:(ARG:0):行動不能状態 != 行動不能_子供
 	}
 		SIF YOBAI_ABLE(ARG:0)
@@ -146,6 +148,17 @@ PRINTFORM P:{YOBAI_ZYOSYU_CALC_POINT(ARG:0), 3, RIGHT}
 CALL SHOP_LIFE_BUTTON_ADD_BOTTOM_PRISONER(ARG:0)
 RETURN RESULT
 
+
+@SHOP_LIFE_EVENTBUY_SHOW21_TARTGETCOUNTY_FILTER
+PRINTFORM %"篩選指定的勢力:     "%
+SELECTCASE SHOP_LIFE_21_FILTER_COUNTRY
+	CASE -1
+		LOCALS = 所有勢力
+	CASEELSE
+		LOCALS = %GET_COUNTRY_NAME(SHOP_LIFE_21_FILTER_COUNTRY)%
+ENDSELECT
+PRINTBUTTON @"[%LOCALS%]", 3
+
 ;-------------------------------------------------
 ;「夜這いする」の右カラム表示処理
 ;-------------------------------------------------
@@ -154,7 +167,10 @@ CALL COLUMN_RIGHT_TITLE("対象者選択", "0", "1", "1+助手数", "0", "=武�
 CALL COLUMN_RIGHT_PRINTL
 CALL COLUMN_RIGHT_LINE
 CALL COLUMN_RIGHT_PRINTL
-
+CALL SHOP_LIFE_EVENTBUY_SHOW21_TARTGETCOUNTY_FILTER
+CALL COLUMN_RIGHT_PRINTL
+CALL COLUMN_RIGHT_LINE
+CALL COLUMN_RIGHT_PRINTL
 ;２段組キャラリスト上とページ移動
 ;ここで判定前に追加条件として指定されていたTMP_COUNTRY_IS_NEIBORINGは
 ;SHOP_LIFE_CHECKCHARA内へ移動
@@ -188,9 +204,9 @@ PRINTFORM (現在{LOCAL:1}/{MIN(2, CALC_SHOP_TIME() - SHOP_TIME)}人)
 RESETCOLOR
 
 PRINTFORM  点数:{LOCAL:2}
-PRINTFORM  
+PRINTFORM
 PRINTBUTTON "[助手自動選択]", 1
-PRINTFORM  
+PRINTFORM
 PRINTBUTTON @"[%ZYOSYU_MODE()%]", 2
 CALL COLUMN_RIGHT_PRINTL
 CALL COLUMN_RIGHT_LINE
@@ -252,6 +268,21 @@ IF ARG:0 == 1
 	WEND
 ELSEIF ARG:0 == 2
 	FLAG:助手フィルタ = ROUND_INCREMENT(FLAG:助手フィルタ, 0, 3)
+ELSEIF ARG:0 == 3
+	SHOP_LIFE_21_FILTER_COUNTRY+=1
+	{
+		WHILE !IS_COUNTRY(SHOP_LIFE_21_FILTER_COUNTRY)
+		|| !TMP_COUNTRY_IS_NEIBORING:(CFLAG:MASTER:所属):SHOP_LIFE_21_FILTER_COUNTRY
+		|| SHOP_LIFE_21_FILTER_COUNTRY == CFLAG:MASTER:所属
+	}
+		PRINT 1
+		SHOP_LIFE_21_FILTER_COUNTRY++
+
+		IF SHOP_LIFE_21_FILTER_COUNTRY >= MAX_COUNTRY
+			SHOP_LIFE_21_FILTER_COUNTRY = -1
+			BREAK
+		ENDIF
+	WEND
 ENDIF
 RETURN 0
 
