@@ -57,7 +57,7 @@ FOR LOCAL, 1, 10
 		PRINTFORML [{POWER(10, LOCAL), 10}] 個人資金{レート * POWER(10, LOCAL), 10}
 NEXT
 PRINTFORML [{MONEY / レート, 10}] 個人資金{MONEY / レート * レート, 10}
-PRINTFORML [0] 將國庫補充到指定的金額
+PRINTFORML [ 0] 將國庫補充到指定的金額
 PRINTFORML [-1] 取消
 INPUT
 IF RESULT <= -1
@@ -71,11 +71,11 @@ ELSEIF RESULT == 0
 	ELSE
 		LOCAL:2 = RESULT - MONEY:(CFLAG:MASTER:所属)
 		IF LOCAL:2 <= 0
-			PRINTFORM 目標金額必須大於國庫已有的金額
+			PRINTFORML 目標金額必須大於國庫已有的金額
 			RESTART
 		ENDIF
 		IF LOCAL:2 * レート > MONEY
-			PRINTFORM 個人資金不足
+			PRINTFORML 個人資金不足
 			RESTART
 		ELSE
 			PRINTFORM 國庫資金增加了
