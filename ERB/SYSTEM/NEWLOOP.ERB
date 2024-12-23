@@ -826,7 +826,6 @@ SELECTCASE RESULT
 		ENDIF
 		;MASTERと選択したMASTERを入れ替える
 		CALL SWAP_CHARA(MASTER, ID_TO_CHARA(選択MASTERID))
-
 		;主人公の所属を選択した勢力にする
 		;既存勢力以外のスタートを選んでいる場合はとりあえず0にしておく
 		CALL CHANGE_COUNTRY(MASTER, MAX(FLAG:OP選択勢力, 0), 1)
@@ -1143,7 +1142,8 @@ SELECTCASE 選択ボーナス
 	CASE 7
 		TALENT:MASTER:精力超群 = 1
 	CASE 8
-		MONEY += 50000
+		;MONEY += 50000
+		CALL ADD_MONEY((50000))
 	CASE 9
 		ITEM:GETNUM(ITEM, "催眠術") = 1
 	CASE 10
