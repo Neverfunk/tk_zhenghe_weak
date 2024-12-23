@@ -14,7 +14,6 @@
 
 DUMPRAND
 VARSET 出場キャラ, -1
-
 ;ひとりめ
 CALL SELECT_CHARA_RANDOM("ARENA_MAIN")
 出場キャラ:0 = RESULT
@@ -63,7 +62,7 @@ IF !RAND:5
 	PRINTFORML 「赢了的话就拿钱回去」
 ENDIF
 
-PRINTFORML 
+PRINTFORML
 PRINTFORML 「…那么，和谁战斗？强敌才能赚钱」
 CALL COLOR_PRINTL("「报名费是", , "5000", カラー_注意, "」")
 IF 出場キャラ >= 0
@@ -98,7 +97,8 @@ SELECTCASE RESULT
 ENDSELECT
 
 PRINTFORML 金5000を支払った
-MONEY -= 5000
+;MONEY -= 5000
+CALL ADD_MONEY(-1*(5000))
 
 IF !対戦相手がキャラ
 	IF IS_FEMALE(対象) && HAS_PENIS(対象)
@@ -168,8 +168,7 @@ CALL ARENA_BATTLE(対象, 相手名前, 敵戦闘力)
 IF RESULT > 0
 	CALL ARENA_WIN(対象, 相手名前, 相手男, 対戦相手がキャラ ? OPPONENT_ID # -1)
 	CALL COLOR_PRINTW(@"得到了奖金{ARENA_CALC_MONEY(対象, 敵戦闘力)}", カラー_注意)
-	MONEY += ARENA_CALC_MONEY(対象, 敵戦闘力)
-
+	CALL ADD_MONEY(ARENA_CALC_MONEY(対象, 敵戦闘力))
 	CALL ARENA_ADD_EXP(対象, 敵戦闘力, 1)
 
 ELSE
@@ -367,7 +366,7 @@ ELSE
 	PRINTFORML 然后对伏在地上的%相手名前%大声辱骂起来
 	PRINTFORMW %ANAME(対象)%在被卷入混乱之前离开了那个地方
 ENDIF
-PRINTFORML 
+PRINTFORML
 PRINTFORMW %ANAME(対象)%领取了奖金，以轻快的步伐离开了斗技场。
 
 ;-------------------------------------------------
@@ -400,6 +399,6 @@ ELSE
 	ENDIF
 ENDIF
 CALL ADD_COOLTIME(対象, 2)
-PRINTFORML 
+PRINTFORML
 PRINTFORMW …%ANAME(対象)%拖着疲惫的身子回到据点
 

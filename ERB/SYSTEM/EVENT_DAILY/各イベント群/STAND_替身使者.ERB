@@ -42,7 +42,8 @@ IF DVAR:箭_获得 == 0
 	PRINTFORMW 那么是否买下这只箭呢
 	CALL ASK_MULTI_JUDGE("买下它", MONEY >= 10000,"还是不要浪费资金了", 1)
 	IF RESULT == 0
-		MONEY -= 10000
+		;MONEY -= 10000
+		CALL ADD_MONEY(-1*(10000))
 		CALL COLOR_PRINTL("花掉了10000金", カラー_注意)
 		PRINTFORMW %ANAME(MASTER)%如愿以偿的买下了这只箭
 		PRINTFORMW 现在的问题是如何去使用它
@@ -57,7 +58,8 @@ ELSEIF DVAR:箭_获得 == 1
 	PRINTFORMW 那么是否买下这只箭呢
 		CALL ASK_MULTI_JUDGE("买下它", MONEY >= 10000,"还是不要浪费资金了", 1)
 	IF RESULT == 0
-		MONEY -= 10000
+		;MONEY -= 10000
+		CALL ADD_MONEY(-1*(10000))
 		CALL COLOR_PRINTL("花掉了10000金", カラー_注意)
 		PRINTFORMW %ANAME(MASTER)%如愿以偿的买下了这只箭
 		PRINTFORMW 现在的问题是如何去使用它
@@ -110,7 +112,7 @@ ELSEIF DVAR:箭_获得 == 2
 					CALL COLOR_PRINTL(@"%ANAME(MASTER)%觉醒了替身PEARL JAM（珍珠果酱）", カラー_注意)
 					DVAR:觉醒_替身 = 5
 			ENDSELECT
-			CALL COLOR_PRINT(@"%ANAME(MASTER)%成为了替身使者", カラー_注意)
+			CALL COLOR_PRINTL(@"%ANAME(MASTER)%成为了替身使者", カラー_注意)
 			SETBIT TALENT:MASTER:日常系, 素質_デイリー_替身使者
 			DVAR:异变_红雾 = 1
 	ENDSELECT
